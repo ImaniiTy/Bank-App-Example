@@ -18,7 +18,7 @@ class MainPage extends StatefulWidget {
   ];
 
   void onTabSelected(int index) {
-
+    //TODO
   }
   
   @override
@@ -126,9 +126,10 @@ class _MainPageState extends State<MainPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Text("Assets Test", style: TextStyle(fontSize: 30.0),),
                 CustomCard(
                   onTap: () {
-
+                    //TODO
                   },
                   iconData: Icons.shopping_cart,
                   title: "Shopping",
@@ -144,7 +145,7 @@ class _MainPageState extends State<MainPage> {
                 ),
                 CustomCard(
                   onTap: () {
-
+                    //TODO
                   },
                   iconData: Icons.shopping_cart,
                   title: "Shopping",
@@ -160,7 +161,7 @@ class _MainPageState extends State<MainPage> {
                 ),
                 CustomCard(
                   onTap: () {
-
+                    //TODO
                   },
                   iconData: Icons.shopping_cart,
                   title: "Shopping",
