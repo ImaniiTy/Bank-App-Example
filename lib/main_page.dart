@@ -1,3 +1,4 @@
+import 'package:bankapp/common.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -8,11 +9,17 @@ class AppBarItem {
 }
 
 class MainPage extends StatefulWidget {
-  MainPage({this.items, this.onTabSelected, this.height: 80.0});
+  final double height = 80;
+  final List<AppBarItem> items = [
+    AppBarItem(iconData: Icons.account_balance, label: "Home"),
+    AppBarItem(iconData: Icons.trending_up, label: "Expenses"),
+    AppBarItem(iconData: Icons.account_balance_wallet, label: "Wallet"),
+    AppBarItem(iconData: Icons.person, label: "Profile"),
+  ];
 
-  final List<AppBarItem> items;
-  final ValueChanged<int> onTabSelected;
-  final double height;
+  void onTabSelected(int index) {
+
+  }
   
   @override
   _MainPageState createState() => _MainPageState();
@@ -108,13 +115,68 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
+        backgroundColor: Colors.grey[200],
         body: Center(
-          child: Text("Placeholder"), //TODO
+          child: Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                CustomCard(
+                  onTap: () {
+
+                  },
+                  iconData: Icons.shopping_cart,
+                  title: "Shopping",
+                  subTitle: "17 Monday June",
+                  iconBackground: Colors.red[300],
+                  sufix: Text("- \$35,88",
+                    style: TextStyle(
+                      color: Colors.red[300],
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+                CustomCard(
+                  onTap: () {
+
+                  },
+                  iconData: Icons.shopping_cart,
+                  title: "Shopping",
+                  subTitle: "17 Monday June",
+                  iconBackground: Colors.red[300],
+                  sufix: Text("- \$35,88",
+                    style: TextStyle(
+                      color: Colors.red[300],
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+                CustomCard(
+                  onTap: () {
+
+                  },
+                  iconData: Icons.shopping_cart,
+                  title: "Shopping",
+                  subTitle: "17 Monday June",
+                  iconBackground: Colors.red[300],
+                  sufix: Text("- \$35,88",
+                    style: TextStyle(
+                      color: Colors.red[300],
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
         ),
         floatingActionButton: _buildFloatingButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
