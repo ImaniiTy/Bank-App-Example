@@ -17,14 +17,21 @@ void changeStatusColor(Color background, Brightness iconBrightness) {
 class Palette {
   //Backgrounds
   static final Color bWhite = Colors.white;
-  static final Color bGrey = Colors.grey[200];
+  static final Color bGrey = Colors.grey[100];
+
+  //Main Colors
+  static final Color lightDarkBlue = Color(0xFF0045c7);
+  static final Color lightDarkBlueAccent = Color(0xFF0c50cd);
+  static final Color lightGreen = Color(0xFF29d85b);
+  static final Color mainBlue = Color(0xFF0050e7);
+  static final Color darkBlue = Colors.indigo[900];
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Bankapp Demo',
       
       initialRoute: '/',
       routes: {
@@ -40,7 +47,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    changeStatusColor(Palette.bWhite, Brightness.dark);
+    // changeStatusColor(Palette.bWhite, Brightness.dark);
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       backgroundColor: Palette.bWhite,
@@ -54,7 +61,7 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    changeStatusColor(Palette.bGrey, Brightness.dark);
+    // changeStatusColor(Palette.bGrey, Brightness.dark);
     return MainPage();
   }
 }

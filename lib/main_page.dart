@@ -1,4 +1,6 @@
 import 'package:bankapp/common.dart';
+import 'package:bankapp/main.dart';
+import 'package:bankapp/perfil_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +29,25 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
+  final List<Widget> _pages = [
+    ProfilePage(
+      title: "Assests Test 1",
+      key: PageStorageKey("test1")
+    ),
+    ProfilePage(
+      title: "Assests Test 2",
+      key: PageStorageKey("test2")
+    ),
+    ProfilePage(
+      title: "Assests Test 3",
+      key: PageStorageKey("test3")
+    ),
+    ProfilePage(
+      title: "Assests Test 4",
+      key: PageStorageKey("test4")
+    ),
+  ];
+  final PageStorageBucket _bucket = PageStorageBucket();
 
   void _updateIndex(int index) {
     widget.onTabSelected(index);
@@ -119,65 +140,10 @@ class _MainPageState extends State<MainPage> {
       onWillPop: () async => false,
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
-        backgroundColor: Colors.grey[200],
-        body: Center(
-          child: Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("Assets Test", style: TextStyle(fontSize: 30.0),),
-                CustomCard(
-                  onTap: () {
-                    //TODO
-                  },
-                  iconData: Icons.shopping_cart,
-                  title: "Shopping",
-                  subTitle: "17 Monday June",
-                  iconBackground: Colors.red[300],
-                  sufix: Text("- \$35,88",
-                    style: TextStyle(
-                      color: Colors.red[300],
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-                CustomCard(
-                  onTap: () {
-                    //TODO
-                  },
-                  iconData: Icons.shopping_cart,
-                  title: "Shopping",
-                  subTitle: "17 Monday June",
-                  iconBackground: Colors.red[300],
-                  sufix: Text("- \$35,88",
-                    style: TextStyle(
-                      color: Colors.red[300],
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-                CustomCard(
-                  onTap: () {
-                    //TODO
-                  },
-                  iconData: Icons.shopping_cart,
-                  title: "Shopping",
-                  subTitle: "17 Monday June",
-                  iconBackground: Colors.red[300],
-                  sufix: Text("- \$35,88",
-                    style: TextStyle(
-                      color: Colors.red[300],
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )
+        backgroundColor: Palette.bGrey,
+        body: PageStorage(
+          bucket: _bucket,
+          child: _pages[_selectedIndex],
         ),
         floatingActionButton: _buildFloatingButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
