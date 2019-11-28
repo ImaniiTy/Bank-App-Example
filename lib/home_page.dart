@@ -52,22 +52,18 @@ class BudgetChart extends CustomPainter {
   }
 }
 
-class BudgetCard extends StatefulWidget {
+class BudgetCard extends StatelessWidget {
+  BudgetCard({Key key, this.budget, this.spent, this.onPressed}) : super(key: key);
+  
   final NumberFormat numberFormat = NumberFormat("#,##0", "en_US");
-  @override
-  _BudgetCardState createState() => _BudgetCardState();
-}
+  final int budget;
+  final int spent;
+  final VoidCallback onPressed;
 
-class _BudgetCardState extends State<BudgetCard> {
-  // _BudgetCardState({this.budget, this.spent});
-
-  double percentage;
-  int budget = 6390;
-  int spent = 2248;
 
   @override
   Widget build(BuildContext context) {
-    percentage = spent / budget;
+    double percentage = spent / budget;
     return InfoCard(
       height: 390.0,
       margin: EdgeInsets.symmetric(vertical: 20.0),
@@ -94,11 +90,7 @@ class _BudgetCardState extends State<BudgetCard> {
                 Text.rich(TextSpan(
                     text: "Add Budget",
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        setState(() {
-                          budget += 500;
-                        });
-                      }, //TODO
+                      ..onTap = onPressed, //TODO
                     style: TextStyle(
                         color: Palette.lightDarkBlue,
                         fontSize: 15.0,
@@ -133,7 +125,7 @@ class _BudgetCardState extends State<BudgetCard> {
                     height: 8.0,
                   ),
                   Text(
-                    "\$${widget.numberFormat.format(spent)}",
+                    "\$${numberFormat.format(spent)}",
                     style: TextStyle(
                         color: Palette.darkBlue,
                         fontSize: 45.0,
@@ -150,7 +142,7 @@ class _BudgetCardState extends State<BudgetCard> {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: "\$${widget.numberFormat.format(budget)}",
+                          text: "\$${numberFormat.format(budget)}",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ]))
@@ -188,6 +180,145 @@ class _BudgetCardState extends State<BudgetCard> {
     );
   }
 }
+
+// class BudgetCard extends StatefulWidget {
+//   final NumberFormat numberFormat = NumberFormat("#,##0", "en_US");
+//   @override
+//   _BudgetCardState createState() => _BudgetCardState();
+// }
+
+// class _BudgetCardState extends State<BudgetCard> {
+//   // _BudgetCardState({this.budget, this.spent});
+
+//   double percentage;
+//   int budget = 6390;
+//   int spent = 2248;
+
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     percentage = spent / budget;
+//     return InfoCard(
+//       height: 390.0,
+//       margin: EdgeInsets.symmetric(vertical: 20.0),
+//       child: Column(
+//         children: <Widget>[
+//           Padding(
+//             padding: EdgeInsets.only(
+//                 top: 15.0, bottom: 35.0, left: 20.0, right: 20.0),
+//             child: Row(
+//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//               children: <Widget>[
+//                 Text.rich(TextSpan(
+//                     text: "for ",
+//                     style: TextStyle(
+//                         color: Palette.lightGrey,
+//                         fontSize: 15.0,
+//                         fontWeight: FontWeight.bold),
+//                     children: <TextSpan>[
+//                       TextSpan(
+//                           text: "Axess Platinum ",
+//                           style: TextStyle(color: Palette.darkBlue)),
+//                       TextSpan(text: "Card")
+//                     ])),
+//                 Text.rich(TextSpan(
+//                     text: "Add Budget",
+//                     recognizer: TapGestureRecognizer()
+//                       ..onTap = () {
+//                         setState(() {
+//                           budget += 500;
+//                         });
+//                       }, //TODO
+//                     style: TextStyle(
+//                         color: Palette.lightDarkBlue,
+//                         fontSize: 15.0,
+//                         fontWeight: FontWeight.bold)))
+//               ],
+//             ),
+//           ),
+//           CustomPaint(
+//             painter: BudgetChart(percentage: percentage, strokeWidth: 18.0),
+//             child: Container(
+//               width: 300,
+//               height: 300,
+//               padding: EdgeInsets.symmetric(vertical: 30.0),
+//               child: Column(
+//                 children: <Widget>[
+//                   SizedBox(
+//                     height: 20.0,
+//                   ),
+//                   Icon(Icons.credit_card,
+//                       color: Palette.lightDarkBlue, size: 40.0),
+//                   SizedBox(
+//                     height: 10.0,
+//                   ),
+//                   Text(
+//                     "You Are Spent",
+//                     style: TextStyle(
+//                         color: Palette.lightGrey,
+//                         fontSize: 16.0,
+//                         fontWeight: FontWeight.bold),
+//                   ),
+//                   SizedBox(
+//                     height: 8.0,
+//                   ),
+//                   Text(
+//                     "\$${widget.numberFormat.format(spent)}",
+//                     style: TextStyle(
+//                         color: Palette.darkBlue,
+//                         fontSize: 45.0,
+//                         fontWeight: FontWeight.bold),
+//                   ),
+//                   SizedBox(
+//                     height: 8.0,
+//                   ),
+//                   Text.rich(TextSpan(
+//                       text: "of ",
+//                       style: TextStyle(
+//                         color: Palette.lightGrey,
+//                         fontSize: 16.0,
+//                       ),
+//                       children: <TextSpan>[
+//                         TextSpan(
+//                           text: "\$${widget.numberFormat.format(budget)}",
+//                           style: TextStyle(fontWeight: FontWeight.bold),
+//                         )
+//                       ]))
+//                 ],
+//               ),
+//             ),
+//           ),
+//           Container(
+//             transform: Matrix4.translationValues(0.0, -55.0, 0.0),
+//             child: Padding(
+//               padding: EdgeInsets.symmetric(horizontal: 40.0),
+//               child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: <Widget>[
+//                   Text(
+//                     "0%",
+//                     style: TextStyle(
+//                       color: Palette.lightGrey,
+//                       fontSize: 16.0,
+//                     ),
+//                   ),
+//                   Text(
+//                     "100%",
+//                     style: TextStyle(
+//                       color: Palette.lightGrey,
+//                       fontSize: 16.0,
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 class SimpleFlatButtom extends StatelessWidget {
   SimpleFlatButtom(
@@ -329,8 +460,16 @@ class _TransactionsListState extends State<TransactionsList> {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _budget = 6390;
+  int _spent = 2248;
 
   List<Widget> _buildItems() {
     return <Widget>[
@@ -345,7 +484,15 @@ class HomePage extends StatelessWidget {
         icon: Icon(Icons.notifications, color: Colors.white, size: 30.0),
         onPressed: () {},
       ),
-      BudgetCard(),
+      BudgetCard(
+        budget: _budget,
+        spent: _spent,
+        onPressed: () {
+          setState(() {
+            _budget += 1000;
+          });
+        },
+      ),
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -353,7 +500,11 @@ class HomePage extends StatelessWidget {
             backgroundColor: Palette.blueGrey,
             text: "Send Money",
             iconData: Icons.swap_horizontal_circle,
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                _spent += 500;
+              });
+            },
             iconSize: 35.0,
             iconColor: Palette.lightDarkBlue,
             textsize: 16.0,
@@ -399,7 +550,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageLayout(
-      key: key,
+      key: widget.key,
       title: "Home Page",
       // painter: ProfileBackground(0.0),
       statusColor: Palette.lightDarkBlue,
