@@ -3,26 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'common.dart';
 
-class ProfileBackground extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    double width = size.width;
-    double height = size.height/2.3;
-    Paint paint = Paint()
-      ..color = Palette.lightDarkBlue;
-    
-    canvas.drawRRect(RRect.fromLTRBR(0, 0, width, height, Radius.circular(50.0)), paint);
-    canvas.drawRect(Rect.fromLTRB(0, 0, width/2, height), paint);
-    canvas.drawRect(Rect.fromLTRB(0, 0, width, height/2), paint);
-
-    paint.color = Palette.lightDarkBlueAccent;
-    canvas.drawCircle(Offset(width,0), 200.0, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
-}
-
 class Badge extends StatelessWidget {
   Badge({this.iconImage});
 
@@ -76,14 +56,9 @@ class ProfileInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return InfoCard(
       height: 330.0,
-      width: double.infinity,
       margin: EdgeInsets.symmetric(vertical: 20.0),
-      decoration: BoxDecoration(
-        color: Palette.bWhite,
-        borderRadius: BorderRadius.circular(20.0)
-      ),
       child: Column(
         children: <Widget>[
           Container(
@@ -142,85 +117,98 @@ class ProfileInfoCard extends StatelessWidget {
 }
 
 class ProfilePage extends StatelessWidget {
-  ProfilePage({Key key, this.title}) : super(key: key);
-  final String title;
+  ProfilePage({Key key}) : super(key: key);
 
-  Widget _buildList() {
-    return ListView(
-      padding: EdgeInsets.all(25.0),
-      children: <Widget>[
-        Container(
-          height: 70.0,
-          width: double.infinity,
-          margin: EdgeInsets.only(top: 20.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                "Profile",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 26.0,
-                ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.edit, color: Colors.white, size: 30.0)
-              )
-            ],
-          ),
+  final List<Widget> _items = [
+    Header(
+      title: Text(
+        "Profile",
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 26.0,
         ),
-        ProfileInfoCard(
-          name: "Ricardo Joseph",
-          email: "ricardojoseph@gmail.com",
-        ),
-        Text(
-          "General",
-          style: TextStyle(fontSize: 20.0),
-        ),
-        CustomCard(
-          onTap: () {
-            //TODO
-          },
-          iconData: Icons.settings,
-          iconColor: Palette.lightDarkBlue,
-          title: "Profile Settings",
-          subTitle: "Update and modify your profile",
-          iconBackground: Colors.blueGrey[100],
-          sufix: Icon(Icons.chevron_right),
-        ),
-        CustomCard(
-          onTap: () {
-            //TODO
-          },
-          iconData: Icons.security,
-          iconColor: Palette.lightDarkBlue,
-          title: "Privacy",
-          subTitle: "Change your password",
-          iconBackground: Colors.blueGrey[100],
-          sufix: Icon(Icons.chevron_right),
-        ),
-        CustomCard(
-          onTap: () {
-            //TODO
-          },
-          iconData: Icons.notifications,
-          iconColor: Palette.lightDarkBlue,
-          title: "Notifications",
-          subTitle: "Change your notification settings",
-          iconBackground: Colors.blueGrey[100],
-          sufix: Icon(Icons.chevron_right),
-        ),
-      ],
-    );
-  }
+      ),
+      icon: Icon(Icons.edit, color: Colors.white, size: 30.0),
+      onPressed: () {},
+    ),
+    ProfileInfoCard(
+      name: "Ricardo Joseph",
+      email: "ricardojoseph@gmail.com",
+    ),
+    Text(
+      "General",
+      style: TextStyle(fontSize: 20.0),
+    ),
+    CustomCard(
+      onTap: () {
+        //TODO
+      },
+      iconData: Icons.settings,
+      iconColor: Palette.lightDarkBlue,
+      title: "Profile Settings",
+      subTitle: "Update and modify your profile",
+      iconBackground: Colors.blueGrey[100],
+      sufix: Icon(Icons.chevron_right),
+    ),
+    CustomCard(
+      onTap: () {
+        //TODO
+      },
+      iconData: Icons.security,
+      iconColor: Palette.lightDarkBlue,
+      title: "Privacy",
+      subTitle: "Change your password",
+      iconBackground: Colors.blueGrey[100],
+      sufix: Icon(Icons.chevron_right),
+    ),
+    CustomCard(
+      onTap: () {
+        //TODO
+      },
+      iconData: Icons.notifications,
+      iconColor: Palette.lightDarkBlue,
+      title: "Notifications",
+      subTitle: "Change your notification settings",
+      iconBackground: Colors.blueGrey[100],
+      sufix: Icon(Icons.chevron_right),
+    ),
+    Text(
+      "Wallet",
+      style: TextStyle(fontSize: 20.0),
+    ),
+      CustomCard(
+      onTap: () {
+        //TODO
+      },
+      iconData: Icons.credit_card,
+      iconColor: Palette.lightDarkBlue,
+      title: "Manage Credit Cards",
+      subTitle: "Add or remove a credit card",
+      iconBackground: Colors.blueGrey[100],
+      sufix: Icon(Icons.chevron_right),
+    ),
+      CustomCard(
+      onTap: () {
+        //TODO
+      },
+      iconData: Icons.monetization_on,
+      iconColor: Palette.lightDarkBlue,
+      title: "Transactions",
+      subTitle: "Manage your transactions",
+      iconBackground: Colors.blueGrey[100],
+      sufix: Icon(Icons.chevron_right),
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    changeStatusColor(Palette.lightDarkBlue, Brightness.light);
-    return CustomPaint(
-      painter: ProfileBackground(),
-      child: _buildList(),
+    return PageLayout(
+      key: key,
+      title: "Profile Page",
+      painter: ProfileBackground(0),
+      statusColor: Palette.lightDarkBlue,
+      statusBrightness: Brightness.light,
+      items: _items,
     );
   }
 }

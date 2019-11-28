@@ -1,4 +1,5 @@
 import 'package:bankapp/common.dart';
+import 'package:bankapp/home_page.dart';
 import 'package:bankapp/main.dart';
 import 'package:bankapp/perfil_page.dart';
 import 'package:flutter/gestures.dart';
@@ -30,21 +31,17 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   final List<Widget> _pages = [
-    ProfilePage(
-      title: "Assests Test 1",
-      key: PageStorageKey("test1")
+    HomePage(
+      key: PageStorageKey("Home Page")
     ),
     ProfilePage(
-      title: "Assests Test 2",
       key: PageStorageKey("test2")
     ),
     ProfilePage(
-      title: "Assests Test 3",
       key: PageStorageKey("test3")
     ),
     ProfilePage(
-      title: "Assests Test 4",
-      key: PageStorageKey("test4")
+      key: PageStorageKey("Profile Page")
     ),
   ];
   final PageStorageBucket _bucket = PageStorageBucket();
@@ -141,13 +138,29 @@ class _MainPageState extends State<MainPage> {
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
         backgroundColor: Palette.bGrey,
-        body: PageStorage(
-          bucket: _bucket,
-          child: _pages[_selectedIndex],
+        body: GestureDetector(
+          child: PageStorage(
+            bucket: _bucket,
+            child: _pages[_selectedIndex],
+          ),
+          onHorizontalDragEnd: (details) {
+            if(details.primaryVelocity < 0) {
+              setState(() {
+                _selectedIndex = _selectedIndex + 1 < _pages.length ? _selectedIndex + 1 : _selectedIndex;
+                print(_selectedIndex);
+              });
+            } else if(details.primaryVelocity > 0)  {
+              setState(() {
+                _selectedIndex = _selectedIndex - 1 >= 0 ? _selectedIndex - 1 : _selectedIndex;
+                print(_selectedIndex);
+              });
+            }
+          },
         ),
         floatingActionButton: _buildFloatingButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: _buildNavigationBar(),
+        
       )
     );
   }

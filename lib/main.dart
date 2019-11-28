@@ -16,15 +16,17 @@ void changeStatusColor(Color background, Brightness iconBrightness) {
 
 class Palette {
   //Backgrounds
-  static final Color bWhite = Colors.white;
-  static final Color bGrey = Colors.grey[100];
+  static const Color bWhite = Colors.white;
+  static const Color bGrey = Color(0xFFF5F5F5);
 
   //Main Colors
-  static final Color lightDarkBlue = Color(0xFF0045c7);
-  static final Color lightDarkBlueAccent = Color(0xFF0c50cd);
-  static final Color lightGreen = Color(0xFF29d85b);
-  static final Color mainBlue = Color(0xFF0050e7);
-  static final Color darkBlue = Colors.indigo[900];
+  static const Color lightDarkBlue = Color(0xFF0045c7);
+  static const Color lightDarkBlueAccent = Color(0xFF0c50cd);
+  static const Color lightGreen = Color(0xFF29d85b);
+  static const Color mainBlue = Color(0xFF0050e7);
+  static const Color darkBlue = Color(0xFF1A237E);
+  static const Color lightGrey = Color(0xFFBDBDBD);
+  static const Color blueGrey = Color(0xFFdfe7f4);
 }
 
 class MyApp extends StatelessWidget {
